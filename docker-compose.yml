@@ -1,0 +1,30 @@
+services:
+  shopper-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "usuario"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: "minha_aplicacao"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" # Mapeia a porta do container para a porta da máquina local
+    networks:
+      - my_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "80:80" # Mapeia a porta do container para a porta da máquina local
+    networks:
+      - my_network
+
+volumes:
+  postgres_data:
+
+networks:
+  my_network:
+    driver: bridge
