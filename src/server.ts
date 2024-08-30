@@ -10,7 +10,7 @@ const port = 3000
 
 try {
     server.listen({ port : port }, () => {
-        console.log(`Ouvindo servidor na porta ${port}`)
+        console.log(`Ouvindo servidor na porta ${port}!`)
     })
     
 } catch (error) {
