@@ -74,7 +74,8 @@ class GeminiService {
           displayName: tempFileName,
         });
         
-        // View the response.
+
+        fs.unlinkSync(tempFileName)
 
         return {
             displayName: uploadResponse.file.displayName,
@@ -89,12 +90,7 @@ class GeminiService {
 }
 
 // Interface para o corpo da requisição de upload
-interface IUploadRequestBody {
-    image: string;
-    customer_code: string;
-    measure_datetime: string;
-    measure_type: string;
-}
+
 
 interface IUploadedFileInfo {
     displayName: string | undefined;
@@ -103,4 +99,4 @@ interface IUploadedFileInfo {
    
 }
 
-export { GeminiService, IUploadRequestBody };
+export { GeminiService };

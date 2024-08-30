@@ -1,10 +1,10 @@
 services:
-  shopper-db:
+  measures-db:
     image: postgres:latest
     environment:
-      POSTGRES_USER: "usuario"
+      POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "123456"
-      POSTGRES_DB: "minha_aplicacao"
+      POSTGRES_DB: "measures"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:

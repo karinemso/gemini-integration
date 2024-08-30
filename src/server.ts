@@ -1,18 +1,20 @@
 import 'dotenv/config';
-
 import fastify from 'fastify'
 import measuresRoutes from './routes/measures.js';
 
 const server = fastify()
 
-
 server.register(measuresRoutes)
-server.get('/testando', (req, res) => {
 
-    return "OLÁ MUNDO"
-})
+const port = 3000
 
-
-server.listen({ port : 3000 }, () => {
-    console.log("tesste")
-})
+try {
+    server.listen({ port : port }, () => {
+        console.log(`Ouvindo servidor na porta ${port}`)
+    })
+    
+} catch (error) {
+    console.log(error)
+    console.log("Execução finalizada")
+    process.exit()
+}

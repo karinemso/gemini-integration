@@ -14,12 +14,15 @@
     "license": "ISC",
     "dependencies": {
         "@google/generative-ai": "^0.17.1",
+        "@prisma/client": "^5.19.0",
         "dotenv": "^16.4.5",
         "fastify": "^4.28.1"
     },
     "devDependencies": {
         "@types/node": "^22.5.1",
         "nodemon": "^3.1.4",
+        "prisma": "^5.19.0",
+        "psql": "^0.0.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.4",
         "vitest": "^2.0.5"
