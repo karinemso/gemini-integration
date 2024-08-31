@@ -10,25 +10,19 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://admin:123456@measures-db:5432/measures"
-
+  url      = "postgresql://admin:123456@measures-db:5432/measures?schema=public"
 }
 
 model UploadedMeasures {
   id    Int     @id @default(autoincrement())
   uuid  String  @unique @default(uuid())
-  type  Float
-  value Float
+  type  String
+  value String
 }
 
 model ConfirmedMeasures {
   id             Int     @id @default(autoincrement())
   uuid           String  @unique @default(uuid())
-  firstValue     Float
-  confirmedValue Float
-}
-
-model MeasuresTypes {
-     id             Int     @id @default(autoincrement())
-     typeDescription String
+  firstValue     String
+  confirmedValue String
 }

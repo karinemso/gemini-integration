@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { GeminiService } from '../services/GeminiService.js';
+import { PrismaClient } from '@prisma/client';
 
 
 interface IUploadRequestBody {
@@ -9,6 +10,7 @@ interface IUploadRequestBody {
     measure_type: string;
 }
 
+const db = new PrismaClient()
 export default class MeasuresController {
     public async uploadService(req: FastifyRequest<{ Body: IUploadRequestBody }>, res: FastifyReply) {
 
@@ -21,8 +23,13 @@ export default class MeasuresController {
             const fileInfo = await gemini.fileManagerUpload(image)
             const response = await gemini.processImage(fileInfo)
 
-
-            // salvar no banco
+            const uploadedMeasure = await db.uploadedMeasures.create({
+                data: {
+                    type: req.body.measure_type, // Exemplo de conversão para número, ajuste conforme necessário
+                    value: response, // Ajuste para o valor correto retornado
+                },
+            });
+    
             res.send(response + " com controller");
         } catch (error) {
             console.error(error);

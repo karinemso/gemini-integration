@@ -9,7 +9,7 @@ server.register(measuresRoutes)
 const port = 3000
 
 try {
-    server.listen({ port : port }, () => {
+    server.listen({ port : port , host:"0.0.0.0" }, () => {
         console.log(`Ouvindo servidor na porta ${port}!`)
     })
     

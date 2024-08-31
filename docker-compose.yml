@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   measures-db:
     image: postgres:latest

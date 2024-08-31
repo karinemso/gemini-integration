@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
-const key: string = process.env.GEMINI_API_KEY ?? "";
-const fileManager = new GoogleAIFileManager(key);
+
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
@@ -11,10 +10,14 @@ import os from 'os';
 // Classe GeminiService
 class GeminiService {
     private genAI: GoogleGenerativeAI;
+    private fileManager : GoogleAIFileManager;
 
     constructor() {
         const key: string = process.env.GEMINI_API_KEY ?? "";
+        console.log(key)
         this.genAI = new GoogleGenerativeAI(key);
+
+        this.fileManager = new GoogleAIFileManager(key);
     }
 
     // Método para acessar o modelo AI
@@ -69,7 +72,7 @@ class GeminiService {
         const tempFileName = this.createTemporaryFileFromBase64(image, "image/jpeg")
             
         // Upload the file and specify a display name.
-        const uploadResponse = await fileManager.uploadFile(tempFileName, {
+        const uploadResponse = await this.fileManager.uploadFile(tempFileName, {
           mimeType: "image/jpeg",
           displayName: tempFileName,
         });
