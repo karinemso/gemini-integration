@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { GeminiService } from '../services/GeminiService.js';
 import { PrismaClient } from '@prisma/client';
+import { UUID } from 'crypto';
 
 
 interface IUploadRequestBody {
@@ -23,14 +24,20 @@ export default class MeasuresController {
             const fileInfo = await gemini.fileManagerUpload(image)
             const response = await gemini.processImage(fileInfo)
 
-            const uploadedMeasure = await db.uploadedMeasures.create({
+            const uploadedMeasure = await db.UploadedMeasures.create({
                 data: {
                     type: req.body.measure_type, // Exemplo de conversão para número, ajuste conforme necessário
                     value: response, // Ajuste para o valor correto retornado
                 },
             });
+
+            res.send({
+
+                image_url: fileInfo.uri,
+                measure_value:response,
+                measure_uuid: uploadedMeasure.uuid
+                })
     
-            res.send(response + " com controller");
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');

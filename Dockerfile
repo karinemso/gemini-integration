@@ -7,6 +7,7 @@ WORKDIR /app
 # Copia o arquivo package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
 
+COPY tsconfig.json ./
 # Instala as dependências da aplicação
 RUN npm install
 
@@ -14,13 +15,10 @@ RUN npm install
 COPY src ./src
 COPY prisma ./prisma
 COPY .env ./
-COPY init-db.sql ./
 
-# Instala o cliente psql
-RUN apt-get update && apt-get install -y postgresql-client
+EXPOSE 3000
 
-# Copia o arquivo de inicialização do banco de dados
-COPY init-db.sh /docker-entrypoint-initdb.d/
-
-# Define o comando padrão
-CMD ["sh", "-c", "until pg_isready -h measures-db -p 5432; do sleep 2; done; npm start"]
+# Compila o código TypeScript para JavaScript
+RUN npm run build
+# Comando para iniciar a aplicação usando o script start
+CMD ["npm", "start"]

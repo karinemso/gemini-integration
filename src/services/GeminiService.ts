@@ -22,7 +22,7 @@ class GeminiService {
 
     // Método para acessar o modelo AI
     public getGenAiModel() {
-        return this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        return this.genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
     }
 
     // Método para converter base64 em uma parte generativa

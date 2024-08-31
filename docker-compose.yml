@@ -1,29 +1,6 @@
 version: '3.8'
 
 services:
-  measures-db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "123456"
-      POSTGRES_DB: "measures"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - my_network
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@example.com"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-    ports:
-      - "80:80"
-    networks:
-      - my_network
-
   app:
     build:
       context: .
@@ -32,11 +9,6 @@ services:
       - "3000:3000"
     networks:
       - my_network
-    depends_on:
-      - measures-db
-
-volumes:
-  postgres_data:
 
 networks:
   my_network:
