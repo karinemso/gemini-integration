@@ -5,7 +5,7 @@
     "main": "dist/server.js",
     "scripts": {
         "test": "vitest",
-        "start": "npx prisma migrate dev --name init && node dist/server.js",
+        "start": "prisma generate && prisma migrate deploy && node dist/server.js",
         "build": "tsc",
         "dev": "ts-node src/server.ts",
         "watch": "tsc -w"
@@ -16,7 +16,8 @@
         "@google/generative-ai": "^0.17.1",
         "@prisma/client": "^5.19.0",
         "dotenv": "^16.4.5",
-        "fastify": "^4.28.1"
+        "fastify": "^4.28.1",
+        "sqlite": "^5.1.1"
     },
     "devDependencies": {
         "@types/node": "^22.5.1",

@@ -1,34 +1,22 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = "postgresql://admin:123456@measures-db:5432/measures"
-
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model UploadedMeasures {
   id    Int     @id @default(autoincrement())
   uuid  String  @unique @default(uuid())
-  type  Float
-  value Float
+  type  String
+  value String
 }
 
 model ConfirmedMeasures {
   id             Int     @id @default(autoincrement())
   uuid           String  @unique @default(uuid())
-  firstValue     Float
-  confirmedValue Float
-}
-
-model MeasuresTypes {
-     id             Int     @id @default(autoincrement())
-     typeDescription String
+  firstValue     String
+  confirmedValue String
 }

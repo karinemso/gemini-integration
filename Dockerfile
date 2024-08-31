@@ -14,12 +14,11 @@ RUN npm install
 # Copia o restante dos arquivos da aplicação para o diretório de trabalho
 COPY src ./src
 COPY prisma ./prisma
+COPY .env ./
+
+EXPOSE 3000
 
 # Compila o código TypeScript para JavaScript
 RUN npm run build
-
-# Expõe a porta em que a aplicação irá rodar (substitua pelo número da porta que sua aplicação usa)
-EXPOSE 3000
-
 # Comando para iniciar a aplicação usando o script start
 CMD ["npm", "start"]
